@@ -33,7 +33,7 @@ end
 
 function LSNPP_MainAddHP(LSNPP_unitID)
 	local LSNPP_PlateFrame = C_NamePlate.GetNamePlateForUnit(LSNPP_unitID)
-	if not LSNPP_PlateFrame.UnitFrame or not LSNPP_PlateFrame.UnitFrame.healthBar then return end
+	if LSNPP_PlateFrame == nil or not LSNPP_PlateFrame.UnitFrame or not LSNPP_PlateFrame.UnitFrame.healthBar then return end
 	local LSNPP_HealthBar = LSNPP_PlateFrame.UnitFrame.healthBar
 	if (not LSNPP_HealthBar.LSNPP_Str_Health) then	
 		LSNPP_HealthBar.LSNPP_Str_Health = LSNPP_HealthBar:CreateFontString (nil, "Overlay", "GameFontNormal")
