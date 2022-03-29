@@ -1,7 +1,7 @@
 ## Author: LightSpell
-## Interface: 90100
+## Interface: 90200
 ## Title: LightSpellNamePlatePercent
 ## Notes: Add percentage to default nameplates.
-## Version: 2.0
+## Version: 2.1
 ## Dependencies: Ace3
 LightSpellNamePlatePercent.lua

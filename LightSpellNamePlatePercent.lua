@@ -32,7 +32,8 @@ end
 function LSNPP:MainAdd(_, UnitID)
 	LSNPP:AddHpString(nil, UnitID)
 	if UnitIsPlayer(UnitID) then
-		LSNPP:AddMpString()
+		local Success = pcall(function() LSNPP:AddMpString() end)
+		if not Success then return end
 		LSNPP:UnregisterEvent("NAME_PLATE_UNIT_ADDED")
 		LSNPP:UnregisterEvent("FORBIDDEN_NAME_PLATE_UNIT_ADDED")
 		LSNPP:RegisterEvent("NAME_PLATE_UNIT_ADDED", "AddHpString")
@@ -106,22 +107,20 @@ function LSNPP:UNIT_POWER_FREQUENT(_, UnitID, PowerID)
 end
 
 function LSNPP:AddMpString()
-	local PlateSubFrames = { C_NamePlate.GetNamePlateForUnit("player"):GetChildren() }
+	local PlateSubFrames = {C_NamePlate.GetNamePlateForUnit("player"):GetChildren()}
 	local PowerFrame
 	for _, Child in ipairs(PlateSubFrames) do
 		if Child:GetName() == "ClassNameplateManaBarFrame" then
 			PowerFrame = Child
 		end
 	end
-	if not PowerFrame then
-		return
-	end
-	LSNPP:PLAYER_TALENT_UPDATE()
+	assert(PowerFrame)
 	local PowerString = PowerFrame:CreateFontString("LSNPP_Str_Power", "Overlay", "GameFontNormal")
 	PowerString:SetPoint("TOPLEFT", PowerFrame)
 	PowerString:SetPoint("BOTTOMRIGHT", PowerFrame)
 	PowerString:SetTextColor(1, 1, 1, 1)
 	PowerString:SetShadowColor(0, 0, 0, 1)
+	LSNPP:PLAYER_TALENT_UPDATE()
 	PowerString:SetText("")
 	PowerString:Show()
 	LSNPP:UNIT_POWER_FREQUENT(nil, "player", LSNPP.PowerToken)
