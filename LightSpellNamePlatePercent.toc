@@ -1,5 +1,5 @@
 ## Author: LightSpell
-## Interface: 90200
+## Interface: 100002
 ## Title: LightSpellNamePlatePercent
 ## Notes: Add percentage to default nameplates.
 ## Version: 2.1
